@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO_AVION</title>
+</head>
+<body>
+    <audio id="ARMA" src="ARMA.mp3" preload="auto"></audio>
+    <audio id="VUELO2" src="VUELO2.mp3" preload="auto"></audio>
+    <CANVAS id="CANVAS2"></CANVAS>
+    <CANVAS id="CANVAS"></CANVAS>   
+    
+    <STYLE>
+        #CANVAS{
+            height: 705PX;
+            width: 1500PX; 
+            background-color: rgb(2, 213, 250);
+        }
+        #CANVAS2{
+            height: 200PX;
+            width: 150PX; 
+            background-color: rgb(2, 213, 250); 
+            position: absolute;    
+        }
+    </STYLE>
+    <SCRIPT>
+      
+        var CAN = document.getElementById("CANVAS");
+        //PARED
+        var CONTEX = CAN.getContext("2d");
+        CONTEX.fillStyle="blue";
+        CONTEX.fillRect(280,0,20,600);
+        //AVION
+        var CAN2 = document.getElementById("CANVAS2");
+        var AVION = CAN2.getContext("2d");
+        AVION.fillStyle="black";
+        AVION.fillRect(80,10,20,20);
+        AVION.fillRect(80,120,20,20);
+        AVION.fillRect(140,1,50,5);
+        AVION.fillRect(140,144,50,5);
+        AVION.moveTo(10,40);
+        AVION.lineTo(100,50);
+        AVION.lineTo(100,0);
+        AVION.lineTo(150,0);
+        AVION.lineTo(300,75);
+        AVION.lineTo(150,150);
+        AVION.lineTo(100,150);
+        AVION.lineTo(100,100);
+        AVION.lineTo(10,110);
+        AVION.lineTo(10,40);
+        AVION.fill();
+        AVION.fillStyle="WHITE";
+        AVION.fillRect(5,50,10,50);
+        AVION.strokeStyle="red";
+        AVION.moveTo(148,2);
+        AVION.lineTo(296,75);
+        AVION.lineTo(148,148);
+        AVION.moveTo(130,2);
+        AVION.lineTo(280,75);
+        AVION.lineTo(130,148);
+        AVION.moveTo(40,70);
+        AVION.lineTo(250,70);
+        AVION.lineTo(250,80);
+        AVION.lineTo(40,80);
+        AVION.stroke();
+        //PROYECTIL
+        var Y=10;
+        var Y2 = 20;
+        var Y3=5;
+        var Y4 = 35;
+        var AUX = 0;
+        var AUX1= 0 ;
+        var AUX2= 0;
+        window.onload = function () {
+            document.onkeydown = MOVIMIENTO;
+        }
+        function MOVIMIENTO(EL_EVENTO) {
+            document.getElementById('VUELO2').play();
+           
+            var EVENTO = (window.event || EL_EVENTO) ;
+            if (EVENTO.keyCode == 40  &&(Y<=500)) {
+                Y = Y + 10;
+                var CUADRADO = document.getElementById("CANVAS2");
+                CUADRADO.style.position = "absolute";
+                CUADRADO.style.top = Y + "px";
+                Y2=Y2+2.1;
+                Y3=Y3+2.1;
+                Y4=Y4+2.1;
+                
+            }
+            else if (EVENTO.keyCode == 38 &&(Y>=20)) {
+                Y = Y - 10;
+                var CUADRADO = document.getElementById("CANVAS2");
+                CUADRADO.style.position = "absolute";
+                CUADRADO.style.top = Y + "px";
+                Y2=Y2-2.1;
+                Y3=Y3-2.1;
+                Y4=Y4-2.1;
+
+            }
+            else if (EVENTO.keyCode == 13) {
+           
+                document.getElementById('ARMA').play();
+                    AUX= Y2;
+                    var PROYECTIL =CAN.getContext("2d");
+                    var X=30;
+                    PROYECTIL.fillStyle="BLACK";
+                    function DISPARO0(){
+                        PROYECTIL.clearRect(30,AUX-2,250    ,5)
+                        requestAnimationFrame(DISPARO0);
+                        PROYECTIL.beginPath();
+                        PROYECTIL.fillRect(X,AUX,2,2);
+                        X=X+3;
+                    }
+                DISPARO0();
+            } 
+            else if (EVENTO.keyCode == 39) {
+           
+                document.getElementById('ARMA').play();
+                AUX1= Y3;
+                AUX2=Y4;
+                var PROYECTIL =CAN.getContext("2d");
+                var X=30;
+                PROYECTIL.fillStyle="WHITE";
+                function DISPARO(){
+                    PROYECTIL.clearRect(30,AUX1-2,250    ,5)
+                    requestAnimationFrame(DISPARO);
+                    PROYECTIL.beginPath();
+                    PROYECTIL.fillRect(X,AUX1,2,2);
+                    X=X+3;
+                }
+              
+                function DISPARO2(){
+                    PROYECTIL.clearRect(30,AUX2-2,250    ,5)
+                    requestAnimationFrame(DISPARO2);
+                    PROYECTIL.beginPath();
+                    PROYECTIL.fillRect(X,AUX2,2,2);
+                    X=X+3;
+                }
+                DISPARO();
+                DISPARO2();
+            } 
+        }
+    </SCRIPT>
+    <H4> ------>>>>>  NAVE 2.0 // JHONNY ROJAS CAMACHO //DISEÑO WEB II  //  [TECLA DECHECHA = DISPARO DOBLE] [TECLA ENTER = DISPARO SIMPLE]   </H4>
+</body>
+
+</html> 
